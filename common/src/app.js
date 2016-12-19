@@ -14,6 +14,12 @@ class App extends Component {
               Todo List Example
             </a>
           </li>
+          <li>
+            <span className="pt-icon-large pt-icon-highlight"></span>
+            <a href="/blog">
+              Blog Example
+            </a>
+          </li>
         </ul>
 
         <hr />

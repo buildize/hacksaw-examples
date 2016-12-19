@@ -1,5 +1,6 @@
 DIRS="
 todos
+blog
 "
 
 rm -rf ./build

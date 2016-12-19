@@ -1,5 +1,6 @@
 import React from 'react';
-import { browserHistory, Router, Route } from 'react-router';
+import { useRouterHistory, Router, Route } from 'react-router';
+import { createHistory } from 'history';
 import App from './app';
 import PostsContainer from './containers/posts-container';
 import PostContainer from './containers/post-container';
@@ -7,7 +8,7 @@ import EditContainer from './containers/edit-container';
 import CreateContainer from './containers/create-container';
 
 export default (
-  <Router history={browserHistory}>
+  <Router history={useRouterHistory(createHistory)({ basename: '/blog' })}>
     <Route component={App}>
       <Route path="/" component={PostsContainer} />
       <Route path="/posts/new" component={CreateContainer} />
