@@ -1,0 +1,21 @@
+{
+  "name": "todos",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
+    "hacksaw": "0.0.7",
+    "hacksaw-react": "0.0.1",
+    "react-scripts": "0.8.4",
+    "uuid": "^3.0.1"
+  },
+  "dependencies": {
+    "react": "^15.4.1",
+    "react-dom": "^15.4.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
