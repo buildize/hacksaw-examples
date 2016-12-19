@@ -2,6 +2,7 @@
   "name": "todos",
   "version": "0.1.0",
   "private": true,
+  "homepage": "/todos",
   "devDependencies": {
     "hacksaw": "0.0.7",
     "hacksaw-react": "0.0.1",
