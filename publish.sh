@@ -10,6 +10,9 @@ for dir in $DIRS; do
   cp -R ./$dir/build/. ./build/$dir
 done
 
+(cd common && npm run build)
+cp -R ./common/build/. ./build
+
 cd ./build
 git init
 git commit --allow-empty -m 'update apps'
