@@ -13,6 +13,8 @@ done
 (cd common && npm run build)
 cp -R ./common/build/. ./build
 
+cp ./CNAME ./build/CNAME
+
 cd ./build
 git init
 git commit --allow-empty -m 'update apps'
