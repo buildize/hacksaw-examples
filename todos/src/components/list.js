@@ -8,11 +8,13 @@ export default class List extends Component {
       <div>
         {items.map(item => (
           <p>
-            <label>
+            <label className="pt-control pt-checkbox">
               <input
                 type="checkbox"
                 onChange={e => item.set({ isDone: e.target.checked })}
+                checked={item.isDone}
               />
+              <span className="pt-control-indicator"></span>
               {item.content}
             </label>
           </p>
