@@ -8,9 +8,22 @@ class App extends Component {
     return (
       <div className="app">
         <Container>
-          <h1>Welcome to Hacksaw examples</h1>
+          <img src="/logo.png" />
           <ul className="example-list">
-            <li><a href="/todos">Todo List Example</a></li>
+            <li>
+              <span className="pt-icon-large pt-icon-properties"></span>
+              <a href="/todos">
+                Todo List Example
+              </a>
+            </li>
+          </ul>
+
+          <hr />
+
+          <h5>Visit hacksaw projects</h5>
+          <ul className="repo-links">
+            <li><a href="https://www.github.com/Buildize/hacksaw" target="_blank">Hacksaw Repository</a></li>
+            <li><a href="https://www.github.com/Buildize/hacksaw-react" target="_blank">Hacksaw React Repository</a></li>
           </ul>
         </Container>
       </div>
