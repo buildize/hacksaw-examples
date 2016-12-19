@@ -1,5 +1,7 @@
 var axios = require('axios');
 var MockAdapter = require('axios-mock-adapter');
+var omit = require('lodash/omit');
+var lipsum = require('lorem-ipsum')
 
 var mock = new MockAdapter(axios, { delayResponse: 2000 });
 
@@ -13,12 +15,19 @@ const posts = [
   {
     id: 2,
     title: 'Lorem very very ipsum',
-    description: 'A good starting point',
-    content: 'This is a test post'
+    description: lipsum(),
+    content: lipsum({ count: 5, units: 'paragraph', suffix: '\n' })
+  },
+  {
+    id: 3,
+    title: lipsum(),
+    description: lipsum(),
+    content: lipsum({ count: 10, units: 'paragraph', suffix: '\n' })
   }
 ];
 
-mock.onGet('/posts').reply(() => [200, posts.reverse()]);
+
+mock.onGet('/posts').reply(() => [200, posts.reverse().map(i => omit(i, 'content'))]);
 
 mock.onGet(/\/posts\/\d+/).reply(config => {
   const id = Number(/\/posts\/(\d+)/.exec(config.url)[1])

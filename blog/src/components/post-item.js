@@ -21,7 +21,7 @@ export default class PostItem extends Component {
         <p>{post.description}</p>
 
         {details ? (
-          <div dangerouslySetInnerHTML={{ __html: marked(post.content)}} />
+          <div dangerouslySetInnerHTML={{ __html: marked(post.content || '')}} />
         ) : null}
 
         <p>

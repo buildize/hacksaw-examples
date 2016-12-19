@@ -12,8 +12,11 @@ class Post {
   }
 
   static get(id) {
+    this.set({ isLoading: true });
+
     axios.get(`/posts/${id}`).then(({ data }) => {
       this.put(data);
+      this.set({ isLoading: false });
     });
   }
 

@@ -2,19 +2,28 @@ import React, { Component } from 'react';
 import Post from '../models/post';
 import PostItem from '../components/post-item';
 import { listener } from 'hacksaw-react';
+import { Spinner } from '@blueprintjs/core';
 
 class PostContainer extends Component {
   componentWillMount() {
-    const { id } = this.props.params;
-    Post.context('post').clean().get(id);
+    const id= Number(this.props.params.id);
+    Post.context('post').clean().populate(i => i.id === id).get(id);
   }
 
   render() {
-    const post = Post.context('post').first;
+    const { first: post, isLoading } = Post.context('post');
 
-    return post ? (
-      <PostItem post={post} details />
-    ) : null
+    return (
+      <div>
+        { post ? <PostItem post={post} details /> : null }
+        { isLoading ? (
+          <div style={{ marginTop: '20px', textAlign: 'center' }}>
+            <Spinner />
+            <p>Loading rest of the data</p>
+          </div>
+        ) : null }
+      </div>
+    )
   }
 }
 
