@@ -11,7 +11,7 @@ class EditContainer extends Component {
   }
 
   handleSubmit(post) {
-    PostStore.save(post).then(post => history.push(`/posts/${post.id}`));
+    PostStore.save(post).then(post => history.push(`posts/${post.id}`));
   }
 
   render() {
