@@ -1,30 +1,30 @@
 import React, { Component } from 'react';
-import Post from '../models/post';
+import PostStore from '../stores/post-store';
 import PostForm from '../components/post-form';
 import { listener } from 'hacksaw-react';
-import { browserHistory } from 'react-router';
+import { history } from '../routes';
 
 class EditContainer extends Component {
   componentWillMount() {
     const { id } = this.props.params;
-    Post.get(id);
+    PostStore.get(id);
   }
 
   handleSubmit(post) {
-    Post.save(post).then(post => browserHistory.push(`/posts/${post.id}`));
+    PostStore.save(post).then(post => history.push(`/posts/${post.id}`));
   }
 
   render() {
     const { id } = this.props.params;
-    const post = Post.all.find(i => i.id === Number(id));
+    const post = PostStore.all.find(i => i.id === Number(id));
 
     return post ? (
       <PostForm
-        post={post.toObject()}
+        post={post}
         onSubmit={this.handleSubmit.bind(this)}
       />
     ) : null
   }
 }
 
-export default listener(Post)(EditContainer);
+export default listener(PostStore)(EditContainer);

@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
-import Post from '../models/post';
+import PostStore from '../stores/post-store';
 import PostList from '../components/post-list';
 import { listener } from 'hacksaw-react';
 import { Spinner } from '@blueprintjs/core';
 
 class PostsContainer extends Component {
   componentWillMount() {
-    Post.context('posts').fetch();
+    PostStore.context('posts').fetch();
   }
 
   render() {
-    const { all: posts, isLoading } = Post.context('posts');
+    const { all: posts, isLoading } = PostStore.context('posts');
 
     return isLoading ? (
       <div style={{ textAlign: 'center' }}>
@@ -22,4 +22,4 @@ class PostsContainer extends Component {
   }
 }
 
-export default listener(Post.context('posts'))(PostsContainer);
+export default listener(PostStore.context('posts'))(PostsContainer);

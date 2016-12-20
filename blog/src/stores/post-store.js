@@ -1,7 +1,7 @@
-import { model } from 'hacksaw';
+import { store } from 'hacksaw';
 import axios from 'axios';
 
-class Post {
+class PostStore {
   static fetch() {
     this.set({ isLoading: true });
 
@@ -36,4 +36,4 @@ class Post {
   }
 }
 
-export default model(Post);
+export default store(PostStore);

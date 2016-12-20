@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Post from '../models/post';
+import PostStore from '../stores/post-store';
 import PostItem from '../components/post-item';
 import { listener } from 'hacksaw-react';
 import { Spinner } from '@blueprintjs/core';
@@ -7,11 +7,11 @@ import { Spinner } from '@blueprintjs/core';
 class PostContainer extends Component {
   componentWillMount() {
     const id= Number(this.props.params.id);
-    Post.context('post').clean().populate(i => i.id === id).get(id);
+    PostStore.context('post').clean().populate(i => i.id === id).get(id);
   }
 
   render() {
-    const { first: post, isLoading } = Post.context('post');
+    const { first: post, isLoading } = PostStore.context('post');
 
     return (
       <div>
@@ -27,4 +27,4 @@ class PostContainer extends Component {
   }
 }
 
-export default listener(Post.context('post'))(PostContainer);
+export default listener(PostStore.context('post'))(PostContainer);

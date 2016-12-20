@@ -7,8 +7,10 @@ import PostContainer from './containers/post-container';
 import EditContainer from './containers/edit-container';
 import CreateContainer from './containers/create-container';
 
+export const history = useRouterHistory(createHistory)({ basename: '/blog' });
+
 export default (
-  <Router history={useRouterHistory(createHistory)({ basename: '/blog' })}>
+  <Router history={history}>
     <Route component={App}>
       <Route path="/" component={PostsContainer} />
       <Route path="/posts/new" component={CreateContainer} />

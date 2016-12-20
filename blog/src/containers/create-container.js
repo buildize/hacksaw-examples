@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import Post from '../models/post';
+import PostStore from '../stores/post-store';
 import PostForm from '../components/post-form';
-import { browserHistory } from 'react-router';
+import { history } from '../routes';
 
 export default class CreateContainer extends Component {
   handleSubmit(post) {
-    Post.save(post).then(post => browserHistory.push(`/posts/${post.id}`));
+    PostStore.save(post).then(post => history.push(`/posts/${post.id}`));
   }
 
   render() {
