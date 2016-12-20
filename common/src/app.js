@@ -20,6 +20,12 @@ class App extends Component {
               Blog Example
             </a>
           </li>
+          <li>
+            <span className="pt-icon-large pt-icon-numerical"></span>
+            <a href="/pagination">
+              Pagination Example
+            </a>
+          </li>
         </ul>
 
         <hr />

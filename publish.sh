@@ -1,6 +1,7 @@
 DIRS="
 todos
 blog
+pagination
 "
 
 rm -rf ./build
