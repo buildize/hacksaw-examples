@@ -1,17 +1,11 @@
-import { model } from 'hacksaw';
 import uuid from 'uuid/v4';
 
-class TodoItem {
-  static keys = ['uuid']; // default is [id]
-  uuid = uuid();
+export default class TodoItem {
+  id = uuid();
 
-  static get done() {
-    return this.all.filter(i => i.isDone);
-  }
-
-  save() {
-    this.context.put(this);
+  constructor(values) {
+    Object.keys(values).forEach(key => {
+      this[key] = values[key];
+    });
   }
 }
-
-export default model(TodoItem);

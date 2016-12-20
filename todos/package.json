@@ -4,8 +4,8 @@
   "private": true,
   "homepage": "/todos",
   "devDependencies": {
-    "hacksaw": "0.0.7",
-    "hacksaw-react": "0.0.1",
+    "hacksaw": "0.1.0",
+    "hacksaw-react": "0.1.0",
     "react-scripts": "0.8.4",
     "uuid": "^3.0.1"
   },
