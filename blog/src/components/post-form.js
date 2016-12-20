@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { EditableText } from '@blueprintjs/core';
+import { Spinner } from '@blueprintjs/core';
 
 export default class PostForm extends Component {
   state = {
@@ -20,6 +21,7 @@ export default class PostForm extends Component {
 
   render() {
     const { post } = this.state;
+    const { isSaving } = this.props;
 
     return (
       <form onSubmit={this.handleSubmit.bind(this)}>
@@ -61,9 +63,13 @@ export default class PostForm extends Component {
         </label>
 
         <br />
-        <button className="pt-button pt-icon-floppy-disk">
-          Save
-        </button>
+        {isSaving ? (
+          <Spinner className="pt-small" />
+        ) : (
+          <button className="pt-button  pt-icon-floppy-disk">
+            Save
+          </button>
+        )}
       </form>
     )
   }

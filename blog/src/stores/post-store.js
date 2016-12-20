@@ -23,6 +23,8 @@ class PostStore {
   static save(post) {
     let promise;
 
+    this.set({ isSaving: true });
+
     if (post.id) {
       promise = axios.patch(`/posts/${post.id}`, post);
     } else {
@@ -31,6 +33,7 @@ class PostStore {
 
     return promise.then(({ data }) => {
       this.put(data);
+      this.set({ isSaving: false });
       return data;
     });
   }
