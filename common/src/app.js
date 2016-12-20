@@ -24,10 +24,11 @@ class App extends Component {
 
         <hr />
 
-        <h5>Visit hacksaw projects</h5>
+        <h5>Visit projects on Github</h5>
         <ul className="repo-links">
           <li><a href="https://www.github.com/Buildize/hacksaw" target="_blank">Hacksaw Repository</a></li>
           <li><a href="https://www.github.com/Buildize/hacksaw-react" target="_blank">Hacksaw React Repository</a></li>
+          <li><a href="https://www.github.com/Buildize/hacksaw-examples" target="_blank">Hacksaw Examples Repository</a></li>
         </ul>
       </div>
     );
