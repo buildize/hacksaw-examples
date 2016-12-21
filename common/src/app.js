@@ -26,6 +26,12 @@ class App extends Component {
               Pagination Example
             </a>
           </li>
+          <li>
+            <span className="pt-icon-large pt-icon-search-template"></span>
+            <a href="/github">
+              Github Search Example
+            </a>
+          </li>
         </ul>
 
         <hr />

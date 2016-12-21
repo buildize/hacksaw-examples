@@ -2,6 +2,7 @@ DIRS="
 todos
 blog
 pagination
+github
 "
 
 rm -rf ./build
