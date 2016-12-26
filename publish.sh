@@ -3,6 +3,7 @@ todos
 blog
 pagination
 github
+shopping-cart
 "
 
 rm -rf ./build

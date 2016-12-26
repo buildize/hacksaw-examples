@@ -2,6 +2,7 @@
   "name": "shopping-cart",
   "version": "0.1.0",
   "private": true,
+  "homepage": "/shopping-cart",
   "devDependencies": {
     "react-scripts": "0.8.4"
   },
