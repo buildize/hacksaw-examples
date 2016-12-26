@@ -3,7 +3,7 @@ import ProductStore from './stores/product-store';
 import Product from './models/product';
 import User from './models/user';
 
-UserStore.put(new User({ id: 1, name: 'Kameko' }));
+UserStore.put(new User({ id: 1, name: 'Kameko', _cartItems: [1, 4, 5] }));
 UserStore.put(new User({ id: 2, name: 'Rasha' }));
 UserStore.put(new User({ id: 3, name: 'Zé' }));
 

@@ -4,9 +4,8 @@ import ProductStore from '../stores/product-store';
 import { Button } from '@blueprintjs/core';
 
 class ProductList extends Component {
-  editProduct(product) {
-    const name = window.prompt('New name', product.name);
-    product.name = name;
+  editProduct(product, key, value) {
+    product[key] = value;
     product.update();
   }
 
@@ -27,13 +26,27 @@ class ProductList extends Component {
             {products.map(product => (
               <tr>
                 <td>{product.id}</td>
-                <td>{product.name}</td>
-                <td>${product.price}</td>
+                <td>
+                  <input
+                    className="pt-input pt-fill"
+                    onChange={e => {
+                      product.name = e.target.value;
+                      product.update();
+                    }}
+                    value={product.name}
+                  />
+                </td>
+                <td>
+                  $ <input
+                    className="pt-input pt-small"
+                    onChange={e => {
+                      product.price = Number(e.target.value);
+                      product.update();
+                    }}
+                    value={product.price}
+                  />
+                </td>
                 <td style={{ textAlign: 'right' }}>
-                  <Button onClick={() => this.editProduct(product)}>
-                    Edit
-                  </Button>
-                  &nbsp;
                   <Button onClick={() => user.addToCart(product.id)}>
                     Add to cart
                   </Button>

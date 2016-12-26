@@ -11,6 +11,7 @@ export default class CartItems extends Component {
             <li>{item.name}</li>
           ))}
         </ul>
+        <b>Total: </b>${user.cartTotal}
       </div>
     )
   }
