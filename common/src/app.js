@@ -32,12 +32,6 @@ class App extends Component {
               Github Search Example
             </a>
           </li>
-          <li>
-            <span className="pt-icon-large pt-icon-shopping-cart"></span>
-            <a href="/shopping-cart">
-              Shopping Cart Example
-            </a>
-          </li>
         </ul>
 
         <hr />
