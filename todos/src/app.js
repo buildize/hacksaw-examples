@@ -1,29 +1,31 @@
 import React, { Component } from 'react';
 import { listener } from 'hacksaw-react';
-import TodoStore from './stores/todo-store';
 import TodoItem from './models/todo-item';
 import List from './components/list';
 import Form from './components/form';
+import store from './store';
 import './app.css';
 
 
 // initialized data
-TodoStore.put(new TodoItem({ content: 'Look at the examples', isDone: true }));
-TodoStore.put(new TodoItem({ content: 'Learn hacksaw' }));
-TodoStore.put(new TodoItem({ content: 'Use hacksaw in a project' }));
+store.items.put(new TodoItem({ content: 'Look at the examples', isDone: true }));
+store.items.put(new TodoItem({ content: 'Learn hacksaw' }));
+store.items.put(new TodoItem({ content: 'Use hacksaw in a project' }));
 //
+
+const doneCount = (items) => items.filter(i => i.isDone).length;
 
 class App extends Component {
   addTodo(object) {
-    TodoStore.put(new TodoItem(object))
+    store.items.put(new TodoItem(object))
   }
 
   updateItem(item) {
-    TodoStore.put(item);
+    store.items.put(item);
   }
 
   render() {
-    const items = TodoStore.all;
+    const items = store.items.all;
 
     return (
       <div className="app">
@@ -38,17 +40,19 @@ class App extends Component {
         </p>
 
         <hr />
-        <p><b>Items Count:</b> {TodoStore.all.length}</p>
-        <p><b>Done Count:</b> {TodoStore.done.length}</p>
+        <p><b>Items Count:</b> {store.items.all.length}</p>
+        <p><b>Done Count:</b> {doneCount(store.items.all)}</p>
 
         <hr />
+
         <List onChange={this.updateItem.bind(this)} items={items} />
 
         <hr />
+        
         <Form onSubmit={this.addTodo.bind(this)} />
       </div>
     );
   }
 }
 
-export default listener(TodoStore)(App);
+export default listener(store)(App);
