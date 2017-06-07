@@ -26,4 +26,4 @@ git checkout -b gh-pages
 touch .nojekyll
 git add .
 git commit -am 'update apps'
-git push git@github.com:buildize/hacksaw-examples gh-pages --force
+git push https://github.com/Buildize/hacksaw-examples.git gh-pages --force
