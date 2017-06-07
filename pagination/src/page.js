@@ -1,36 +1,30 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
-import cx from 'classnames';
 import { Spinner } from '@blueprintjs/core';
+import { Link } from 'react-router';
 import { listener } from 'hacksaw-react';
-import AppStore from './stores/app-store';
+import cx from 'classnames';
+import store from './store';
+import services from './services';
 
-window.AppStore = AppStore;
+const mapToListener = props => {
+  const { page } = props.params;
+  const viewStore = store.view('pages', page);
+  services.fetch(viewStore, page);
+
+  return { viewStore }
+}
 
 class Page extends Component {
-  componentWillMount() {
-    this.fetch(this.props);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (this.props.params.page !== nextProps.params.page) this.fetch(nextProps);
-  }
-
-  fetch(props) {
-    const { page } = props.params;
-    AppStore.context('pages', page).fetch(page);
-  }
-
   render() {
-    const page = this.props.params.page;
-    const { all: items, isLoading } = AppStore.context('pages', page);
+    const { viewStore, params: { page } } = this.props;
+    const items = viewStore.items.all;
 
     return (
       <div>
         <h3>Page: {page}</h3>
         <hr />
 
-        {isLoading ? (
+        {viewStore.isLoading ? (
           <div style={{ textAlign: 'center' }}>
             <p>
               <Spinner />
@@ -59,4 +53,4 @@ class Page extends Component {
   }
 }
 
-export default listener(AppStore.context('pages'))(Page)
+export default listener(mapToListener)(Page)
