@@ -1,25 +1,36 @@
 import React, { Component } from 'react';
-import PostStore from '../stores/post-store';
 import PostForm from '../components/post-form';
+import store from '../store';
+import services from '../services';
 import { listener } from 'hacksaw-react';
 import { history } from '../routes';
 
+const mapToListener = () => {
+  const viewStore = store.view('create-container');
+  viewStore.clean();
+
+  return {
+    viewStore
+  }
+}
+
 class CreateContainer extends Component {
   handleSubmit(post) {
-    PostStore.context('create').save(post).then(post => history.push(`posts/${post.id}`));
+    services.save(this.props.viewStore, post)
+      .then(post => history.push(`posts/${post.id}`));
   }
 
   render() {
-    const { isSaving } = PostStore.context('create');
+    const { viewStore } = this.props;
 
     return (
       <PostForm
         post={{}}
         onSubmit={this.handleSubmit.bind(this)}
-        isSaving={isSaving}
+        isSaving={viewStore.isSaving}
       />
     )
   }
 }
 
-export default listener(PostStore.context('create'))(CreateContainer);
+export default listener(mapToListener)(CreateContainer);

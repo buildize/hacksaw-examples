@@ -1,32 +1,41 @@
 import React, { Component } from 'react';
-import PostStore from '../stores/post-store';
 import PostForm from '../components/post-form';
+import store from '../store';
+import services from '../services';
 import { listener } from 'hacksaw-react';
 import { history } from '../routes';
 
-class EditContainer extends Component {
-  componentWillMount() {
-    const { id } = this.props.params;
-    PostStore.context('edit').get(id);
-  }
 
+const mapToListener = props => {
+  const id = Number(props.params.id);
+  const viewStore = store.view('edit-container', id);
+  viewStore.posts.populate(i => i.id === id);
+  services.get(viewStore, id);
+
+  return {
+    viewStore
+  }
+}
+
+
+class EditContainer extends Component {
   handleSubmit(post) {
-    PostStore.context('edit').save(post).then(post => history.push(`posts/${post.id}`));
+    services.save(this.props.viewStore, post)
+      .then(post => history.push(`posts/${post.id}`));
   }
 
   render() {
-    const { id } = this.props.params;
-    const post = PostStore.all.find(i => i.id === Number(id));
-    const isSaving = PostStore.context('edit').isSaving;
+    const { viewStore } = this.props;
+    const post = viewStore.posts.first;
 
     return post ? (
       <PostForm
         post={post}
         onSubmit={this.handleSubmit.bind(this)}
-        isSaving={isSaving}
+        isSaving={viewStore.isSaving}
       />
     ) : null
   }
 }
 
-export default listener(PostStore.context('edit'))(EditContainer);
+export default listener(mapToListener)(EditContainer);
