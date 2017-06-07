@@ -1,37 +1,27 @@
 import React, { Component } from 'react';
-import { listener } from 'hacksaw-react';
-import UserStore from '../stores/user-store';
 import UserList from '../components/user-list';
-import isEqual from 'lodash/isEqual';
+import store from '../store';
+import { userServices } from '../services';
+import { listener } from 'hacksaw-react';
+
+const mapToListener = props => {
+  const { query } = props.location;
+  const { keyword, location, language } = query;
+  const viewStore = store.view('search-container', query);
+
+  if (Object.keys(query).length) {
+    userServices.search(viewStore, keyword, location, language)
+  }
+
+  return {
+    viewStore
+  }
+}
 
 class SearchContainer extends Component {
-  componentWillMount() {
-    this.search(this.props);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (!isEqual(this.props.location.query, nextProps.location.query)) {
-      this.search(nextProps);
-    }
-  }
-
-  getStore(props) {
-    const { query } = props.location;
-    return UserStore.context('search', query)
-  }
-
-  search(props) {
-    const { query } = props.location;
-    const { keyword, location, language } = query;
-
-    if (Object.keys(query).length) {
-      this.getStore(props).search(keyword, location, language);
-    }
-  }
-
   render() {
-    const { query } = this.props.location;
-    const users = this.getStore(this.props).all;
+    const { viewStore } = this.props;
+    const users = viewStore.users.all;
 
     return users.length ? (
       <div>
@@ -55,4 +45,4 @@ class SearchContainer extends Component {
   }
 }
 
-export default listener(UserStore.context('search'))(SearchContainer);
+export default listener(mapToListener)(SearchContainer);

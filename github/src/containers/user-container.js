@@ -1,23 +1,30 @@
 import React, { Component } from 'react';
 import { listener } from 'hacksaw-react';
-import RepoStore from '../stores/repo-store';
-import UserStore from '../stores/user-store';
+import store from '../store';
+import { userServices, repoServices } from '../services';
 import SearchBar from '../components/search-bar';
 import UserInfo from '../components/user-info';
 import { history } from '../routes';
 import isEqual from 'lodash/isEqual';
 
-class UserContainer extends Component {
-  componentWillMount() {
-    const { login } = this.props.params;
-    UserStore.get(login);
-    RepoStore.context('user', login).fetch(login);
-  }
+const mapToListener = props => {
+  const { login } = props.params;
+  const viewStore = store.view('user-container', login);
 
+  userServices.get(viewStore, login);
+  repoServices.fetch(viewStore, login);
+
+  return {
+    viewStore
+  }
+}
+
+
+class UserContainer extends Component {
   render() {
-    const { login } = this.props.params;
-    const user = UserStore.all.find(i => i.login === login);
-    const repos = RepoStore.context('user', login).all;
+    const { viewStore } = this.props;
+    const user = viewStore.users.first;
+    const repos = viewStore.repos.all;
 
     return user ? (
       <div>
@@ -27,4 +34,4 @@ class UserContainer extends Component {
   }
 }
 
-export default listener(UserStore, RepoStore.context('user'))(UserContainer);
+export default listener(mapToListener)(UserContainer);
