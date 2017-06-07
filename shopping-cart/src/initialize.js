@@ -14,3 +14,6 @@ ProductStore.put(new Product({ id: 2, name: 'King Solomon\'s Ring', price: 5 }))
 ProductStore.put(new Product({ id: 3, name: 'Puslu Kıtalar Atlası', price: 4 }));
 ProductStore.put(new Product({ id: 4, name: 'Apology of Socrates', price: 2 }));
 ProductStore.put(new Product({ id: 5, name: 'Sapiens: A Brief History of Humankind', price: 6 }));
+
+for(let i = 0 ; i < 1000 ;i++)
+ProductStore.create(Math.random(), Math.random());
